@@ -1,18 +1,30 @@
-# Python Function sample for riff on knative
- 
-A demo of the uppercasing python function on riff 0.1.3.
+# Python Function sample for riff on Knative
 
-Create the function
+## Running this function on riff
+
+1. Deploy your function
+
 ```bash
-riff function create custom pythondemo --git-repo https://github.com/matthewmcnew/python-function --artifact upper.py --image gcr.io/$GCP_PROJECT/mypthon --verbose --handler upper --invoker-url https://raw.githubusercontent.com/matthewmcnew/python3-function-invoker/master/python3-invoker.yaml
+riff service create upper --image matthewmcnew/python-upper-example
 ```
 
-Invoke it with riff service service invoke
+2. Invoke your function
+
 ```bash
-riff service invoke pythondemo --text -- -w '\n' -d riffknative
+riff service invoke upper --text -- -d 'i would like to shout'
 ```
-and see this result:
+
+output
+```bash
+curl 35.221.50.30/ -H 'Host: upper.default.example.com' -H 'Content-Type: text/plain' -d 'i would like to shout'
+I WOULD LIKE TO SHOUT
 ```
-curl 35.221.5.82/ -H 'Host: pythondemo.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d riffknative
-RIFFKNATIVE
+
+## Building this function
+
+1. Build your docker image and push to your image repository
+
+```bash
+docker build . -t matthewmcnew/python-upper-example
+docker push matthewmcnew/python-upper-example
 ```
