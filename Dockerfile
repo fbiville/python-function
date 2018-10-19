@@ -1,4 +1,4 @@
-FROM matthewmcnew/python3-function-invoker:0.0.8-snapshot
+FROM projectriff/python3-function-invoker:0.1.0-snapshot
 ARG FUNCTION_MODULE=upper.py
 ARG FUNCTION_HANDLER=upper
 ADD ./${FUNCTION_MODULE} /
